@@ -1,0 +1,67 @@
+/*JetBrains Mono*/
+@font-face {
+    font-family: 'jetbrains';
+    src: url("https://fly.storage.tigris.dev/fonts/webfont/jetbrains.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'jetbrains';
+    src: url("https://fly.storage.tigris.dev/fonts/webfont/jetbrains-italic.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/*Inter*/
+@font-face {
+    font-family: 'inter';
+    src: url("https://fly.storage.tigris.dev/fonts/webfont/inter.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'inter';
+    src: url("https://fly.storage.tigris.dev/fonts/webfont/inter-italic.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/*Source Serif 4*/
+@font-face {
+    font-family: 'sourceserif';
+    src: url("https://fly.storage.tigris.dev/fonts/webfont/sourceserif.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'sourceserif';
+    src: url("https://fly.storage.tigris.dev/fonts/webfont/sourceserif-italic.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/*D-DIN*/
+@font-face {
+    font-family: 'din';
+    src: url("https://fly.storage.tigris.dev/fonts/webfont/din.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'din';
+    src: url("https://fly.storage.tigris.dev/fonts/webfont/din-bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
