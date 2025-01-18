@@ -1,0 +1,21 @@
+.row {
+    @apply flex items-center;
+}
+
+.col {
+    @apply flex flex-col items-center;
+}
+
+.wide {
+    @apply max-w-8xl mx-auto px-4 sm:px-6 md:px-8;
+}
+
+.divider-v {
+    @apply w-px h-8 bg-gray-200;
+}
+
+/*Menu*/
+
+.menus {
+    @apply row gap-2 h-full;
+}

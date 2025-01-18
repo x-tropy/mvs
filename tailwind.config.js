@@ -11,6 +11,11 @@ export default {
       mono: ["jetbrains"],
       num: ["din"]
     },
+    extend: {
+      maxWidth: {
+        '8xl': '90rem',  // 1440px
+      }
+    }
   },
   plugins: [],
 }
