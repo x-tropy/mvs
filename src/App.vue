@@ -1,9 +1,10 @@
 <script setup>
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import {faGithub, faXTwitter} from "@fortawesome/free-brands-svg-icons";
-import {Search, ChevronDown} from "lucide-vue-next"
+import {Search, ChevronDown,GitBranch, Database, SquareTerminal, Bug, Inbox, Send, X, Map, Trash2, Bell, UserRoundPlus} from "lucide-vue-next"
 import {useWindowSize} from '@vueuse/core'
 import {computed, ref} from 'vue'
+import Tabs from "./components/button/Tabs.vue";
 
 const {width, height} = useWindowSize()
 
@@ -27,11 +28,6 @@ const textMenus = [
   {
     text: 'Roadmap',
     url: '/roadmap',
-  },
-  {
-    text: 'Resume',
-    url: 'https://docroll.fly.dev',
-    external: true
   }
 ]
 
@@ -93,58 +89,90 @@ const togglePanel = () => {
       <button class="menu-item">
         <Search class="menu-icon"/>
         <span class="lg-show ml-1 mr-6 text-sm text-gray-400">Search...</span>
-        <kbd class="lg-show text-xs font-semibold text-gray-400 rounded-sm px-1 py-0.5 bg-gray-100 border">Ctrl+K</kbd>
+        <kbd class="lg-show text-xs font-semibold !text-gray-400 rounded-sm px-1 py-0.5 btn-outline">Ctrl+K</kbd>
       </button>
       <span class="divider-v lg-show"></span>
       <a v-for="el in iconMenus" target="_blank" class="menu-item" :href="el.url">
         <font-awesome-icon class="menu-icon" :icon="el.icon"/>
       </a>
+      <div class="menu-item">
+        <button class="btn-icon btn-ghost">
+          <Bell/>
+          <span class="dot"></span>
+        </button>
+      </div>
     </nav>
     <!--    <div class="absolute bg-white w-full left-0 top-14">abc</div>-->
   </header>
 
-  <h1 class="font-mono text-2xl italic font-black">{{ width }}</h1>
-  <p>
-    <strong class="">Current route path 12345:</strong> {{ $route.fullPath }}
-  </p>
-  <p class="font-num text-4xl">123455</p>
-  <nav>
-    <RouterLink :to="{name: 'home'}">-> Home
-    </RouterLink>
 
-    <RouterLink :to="{name: 'about'}">-> About
-    </RouterLink>
+  <main class="wide">
+    <div class="row gap-4">
+      <button class="btn btn-md btn-primary">
+        <Search/>
+        Search posts
+      </button>
 
-    <RouterLink :to="{
-      name: 'posts',
-      params: {id: 'jon'}
-    }">
-      -> Jon's posts
-    </RouterLink>
+      <button class="btn btn-md btn-primary">
+        <Send/>
+        Submit changes
+      </button>
 
-    <RouterLink :to="{
-      name: 'profile',
-      params: { id: 'roy' }
-    }">
-      -> Roy's profile
-    </RouterLink>
+      <button class="btn btn-md btn-outline">
+        <X/>
+        Cancel
+      </button>
 
-    <RouterLink :to="{
-      name: 'posts',
-      params: {id: 'roy'}
-    }">
-      -> Roy's posts
-    </RouterLink>
+      <button class="btn btn-lg btn-primary">
+        <Map/>
+        Roadmap
+      </button>
 
-    <RouterLink :to="{
-      name: 'profile',
-      params: { id: 'jon' }
-    }">
-      -> Jon's profile
-    </RouterLink>
+      <button class="btn btn-sm btn-danger">
+        <Trash2/>
+        Delete
+      </button>
 
-  </nav>
-  <main class="z-0">
+      <button class="btn btn-sm btn-primary">
+        <UserRoundPlus/>
+        Add people
+      </button>
+
+      <button class="btn-icon btn-primary">
+        <UserRoundPlus/>
+      </button>
+      <button class="btn-icon btn-ghost">
+        <Send/>
+      </button>
+      <button class="btn-icon btn-danger ">
+        <Trash2/>
+      </button>
+
+      <button class="btn-icon btn-ghost">
+        <Bell/>
+        <span class="dot number">999+</span>
+      </button>
+      <button class="btn-icon btn-ghost">
+        <Bell/>
+        <span class="dot number urgent">3</span>
+      </button>
+      <button class="btn-icon btn-ghost">
+        <Bell/>
+        <span class="dot"></span>
+      </button>
+      <button class="btn btn-primary btn-md">
+        <Inbox/>
+        Mails
+        <span class="divider-v"></span>
+        <span class="number">62</span>
+      </button>
+      <button
+        class="btn btn-primary btn-md"
+      >Select more
+        <ChevronDown class="h-3 w-3"/>
+      </button>
+    </div>
+    <Tabs />
     <RouterView/>
   </main>
   <div class="mask" @click="maskOn = !maskOn" :class="{'hidden': !maskOn}"></div>
