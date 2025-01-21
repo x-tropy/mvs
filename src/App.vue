@@ -4,7 +4,6 @@ import {faGithub, faXTwitter} from "@fortawesome/free-brands-svg-icons";
 import {Search, ChevronDown,GitBranch, Database, SquareTerminal, Bug, Inbox, Send, X, Map, Trash2, Bell, UserRoundPlus} from "lucide-vue-next"
 import {useWindowSize} from '@vueuse/core'
 import {computed, ref} from 'vue'
-import Tabs from "./components/button/Tabs.vue";
 
 const {width, height} = useWindowSize()
 
@@ -95,7 +94,7 @@ const togglePanel = () => {
       <a v-for="el in iconMenus" target="_blank" class="menu-item" :href="el.url">
         <font-awesome-icon class="menu-icon" :icon="el.icon"/>
       </a>
-      <div class="menu-item">
+      <div class="menu-item" v-tippy="{ content: 'NotificationNotificationNotificationNotification', offset:[0, 0], trigger:'mouseenter click', animation: 'shift-away', interactive: true, placement: 'bottom' }">
         <button class="btn-icon btn-ghost">
           <Bell/>
           <span class="dot"></span>
@@ -107,72 +106,7 @@ const togglePanel = () => {
 
 
   <main class="wide">
-    <div class="row gap-4">
-      <button class="btn btn-md btn-primary">
-        <Search/>
-        Search posts
-      </button>
 
-      <button class="btn btn-md btn-primary">
-        <Send/>
-        Submit changes
-      </button>
-
-      <button class="btn btn-md btn-outline">
-        <X/>
-        Cancel
-      </button>
-
-      <button class="btn btn-lg btn-primary">
-        <Map/>
-        Roadmap
-      </button>
-
-      <button class="btn btn-sm btn-danger">
-        <Trash2/>
-        Delete
-      </button>
-
-      <button class="btn btn-sm btn-primary">
-        <UserRoundPlus/>
-        Add people
-      </button>
-
-      <button class="btn-icon btn-primary">
-        <UserRoundPlus/>
-      </button>
-      <button class="btn-icon btn-ghost">
-        <Send/>
-      </button>
-      <button class="btn-icon btn-danger ">
-        <Trash2/>
-      </button>
-
-      <button class="btn-icon btn-ghost">
-        <Bell/>
-        <span class="dot number">999+</span>
-      </button>
-      <button class="btn-icon btn-ghost">
-        <Bell/>
-        <span class="dot number urgent">3</span>
-      </button>
-      <button class="btn-icon btn-ghost">
-        <Bell/>
-        <span class="dot"></span>
-      </button>
-      <button class="btn btn-primary btn-md">
-        <Inbox/>
-        Mails
-        <span class="divider-v"></span>
-        <span class="number">62</span>
-      </button>
-      <button
-        class="btn btn-primary btn-md"
-      >Select more
-        <ChevronDown class="h-3 w-3"/>
-      </button>
-    </div>
-    <Tabs />
     <RouterView/>
   </main>
   <div class="mask" @click="maskOn = !maskOn" :class="{'hidden': !maskOn}"></div>
