@@ -1,6 +1,6 @@
 <script setup>
 import {Bell, Bug, Database, GitBranch, SquareTerminal} from "lucide-vue-next";
-import FeatureIcon from "../../Blocks/FeatureIcon.vue";
+import FeatureIcon from "Blocks/FeatureIcon.vue";
 import {ref} from 'vue'
 import {Tippy} from "vue-tippy";
 
