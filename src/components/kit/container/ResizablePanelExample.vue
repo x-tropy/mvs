@@ -1,5 +1,5 @@
 <script setup>
-import ResizablePanel from "Components/container/ResizablePanel.vue";
+import ResizablePanel from "kit/container/ResizablePanel.vue";
 
 </script>
 
@@ -8,7 +8,7 @@ import ResizablePanel from "Components/container/ResizablePanel.vue";
     <!--      min-h-0 overflow-hidden make sure the ResizablePanel's container remain unaffected by its children-->
     <div class="flex flex-1 min-h-0 overflow-hidden">
       <ResizablePanel panelId="1" class="bg-white">
-        <div class="select-none h-full overflow-auto">
+        <div class="select-none h-full overflow-auto scrollable-thin">
           Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
           aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
           Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
@@ -35,7 +35,7 @@ import ResizablePanel from "Components/container/ResizablePanel.vue";
     </div>
 
     <ResizablePanel class="bg-white border-t border-gray-200" panelId="2" direction="vertical">
-      <div class="select-none h-full overflow-auto">
+      <div class="select-none h-full scrollable">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
         aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
         Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni

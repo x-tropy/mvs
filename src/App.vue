@@ -1,16 +1,20 @@
 <script setup>
 import {faGithub, faXTwitter} from "@fortawesome/free-brands-svg-icons";
 import {ref} from 'vue'
-import Header from 'Components/navigation/Header.vue'
-import ResizablePanelExample from "Components/container/ResizablePanelExample.vue";
+import Header from 'kit/navigation/Header.vue'
+import ResizablePanelExample from "kit/container/ResizablePanelExample.vue";
+
 const textMenus = [
   {
-    text: 'Components',
-    url: '/components',
+    text: 'UI Kit',
+    url: '/ui-kit',
   },
   {
     text: 'Blocks',
     url: '/blocks',
+  }, {
+    text: 'Templates',
+    url: '/templates',
   },
   {
     text: 'Base',
@@ -28,11 +32,11 @@ const textMenus = [
 const iconMenus = [
   {
     icon: faGithub,
-    url: 'http://github.com/x-tropy/docroll'
+    url: 'http://github.com/x-tropy/mvs'
   },
   {
     icon: faXTwitter,
-    url: 'http://github.com/x-tropy/docroll'
+    url: 'http://x.com/extropy_ai'
   }
 ]
 
@@ -45,9 +49,14 @@ const toggle = () => {
 
 
 <template>
-  <Header @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus" :maskOn="maskOn"/>
-  <main class="wide my-10">
-    <ResizablePanelExample/>
-  </main>
-  <div class="mask" @click="maskOn = !maskOn" :class="{'opacity-0 invisible': !maskOn}"></div>
+  <div class="flex h-screen flex-col">
+    <Header @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus" :maskOn="maskOn"/>
+    <div class="flex-1 scrollable">
+      <main class="wide my-10">
+        <RouterView/>
+
+      </main>
+    </div>
+    <div class="mask" @click="maskOn = !maskOn" :class="{'opacity-0 invisible': !maskOn}"></div>
+  </div>
 </template>

@@ -7,8 +7,9 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      'Components': path.resolve(__dirname, './src/components/Components'),
-      'Blocks': path.resolve(__dirname, './src/components/Blocks'),
+      'kit': path.resolve(__dirname, './src/components/kit'),
+      'block': path.resolve(__dirname, './src/components/block'),
+      'template': path.resolve(__dirname, './src/components/template'),
     },
   },
 })
