@@ -1,0 +1,58 @@
+/* two sizes available: normal, and thin */
+
+.scrollable-thin,
+.scrollable {
+  overflow: auto;
+}
+
+.scrollable-thin::-webkit-scrollbar-button,
+.scrollable::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  /* bg-gray-400 */
+  background: #9ca3af !important;
+}
+
+
+/* definition of normal scrollbar ------------------------*/
+
+.scrollable {
+  &::-webkit-scrollbar {
+    width: 11px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /* bg-gray-200 */
+    background: #e5e7eb;
+    border-radius: 0px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    /* bg-gray-300 */
+    background: #d1d5db;
+  }
+}
+
+
+/* definition of thin scrollbar ------------------------*/
+
+.scrollable-thin {
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /* bg-gray-200 */
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    /* bg-gray-400 */
+    background: #9ca3af;
+  }
+}
