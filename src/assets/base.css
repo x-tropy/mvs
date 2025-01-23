@@ -1,0 +1,11 @@
+.linear-green {
+  @apply bg-gradient-to-r from-emerald-500 to-sky-400;
+}
+
+.linear-red {
+  @apply bg-gradient-to-r from-pink-600 to-amber-300;
+}
+
+.linear-purple {
+  @apply bg-gradient-to-r from-purple-600 to-cyan-400;
+}

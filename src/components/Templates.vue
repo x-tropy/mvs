@@ -3,7 +3,7 @@
 </script>
 
 <template>
-components
+Templates
 </template>
 
 <style scoped>

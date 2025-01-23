@@ -1,23 +1,23 @@
 import {createWebHistory, createRouter} from 'vue-router'
 
-import HomeView from './components/HomeView.vue'
-import AboutView from './components/AboutView.vue'
+import HomeView from './components/Home.vue'
 import User from './components/User.vue'
 import UserProfile from "./components/UserProfile.vue";
 import UserPosts from "./components/UserPosts.vue";
-import Components from "./components/Components.vue";
+import Kit from "./components/Kit.vue";
 import Blocks from "./components/Blocks.vue";
+import Templates from "./components/Templates.vue";
 import Base from "./components/Base.vue";
 import Utility from "./components/Utility.vue";
 import Roadmap from "./components/Roadmap.vue";
 
 const routes = [
-  {path: '/components', component: Components},
-  {path: '/blocks', component: Blocks},
-  {path: '/base', component: Base},
-  {path: '/utility', component: Utility},
-  {path: '/roadmap', component: Roadmap},
-  {path: '/about', component: AboutView, name: 'about'},
+  {path: '/ui-kit', component: Kit, meta: {title: 'UI Kit 🟨'}},
+  {path: '/blocks', component: Blocks, meta: {title: 'Blocks 🟨🟨'}},
+  {path: '/templates', component: Templates, meta: {title: 'Templates 🟨🟨🟨'}},
+  {path: '/base', component: Base, meta: {title: 'Base 🔹 CSS'}},
+  {path: '/utility', component: Utility, meta: {title: 'Utility 🔹 JavaScript'}},
+  {path: '/roadmap', component: Roadmap, meta: {title: 'Roadmap 🗺️'}},
   {path: '/', component: HomeView, name: 'home'},
   {
     path: '/user/:id', component: User, name: 'user',
@@ -44,5 +44,11 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
+router.beforeEach((to, from, next) => {
+  const title = to?.meta?.title || 'mvs UI';
+  document.title = title;
+  next();
+});
 
 export default router

@@ -1,5 +1,6 @@
 @import 'tailwind.css';
 @import "scrollbar.css";
+@import "base.css";
 @import 'font.css';
 @import 'animation.css';
 @import 'typography.css';
