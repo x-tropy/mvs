@@ -2,7 +2,7 @@
 import {faGithub, faXTwitter} from "@fortawesome/free-brands-svg-icons";
 import {ref} from 'vue'
 import Header from 'kit/navigation/Header.vue'
-import ResizablePanelExample from "kit/container/ResizablePanelExample.vue";
+import { useMediaQuery } from '@vueuse/core'
 
 const textMenus = [
   {
@@ -36,7 +36,7 @@ const iconMenus = [
   },
   {
     icon: faXTwitter,
-    url: 'http://x.com/extropy_ai'
+    url: 'http://x.com/extropy_ui'
   }
 ]
 
@@ -45,16 +45,17 @@ const toggle = () => {
   maskOn.value = !maskOn.value
 }
 
+const isLargeScreen = useMediaQuery('(min-width: 768px)')
+
 </script>
 
 
 <template>
   <div class="flex h-screen flex-col">
     <Header @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus" :maskOn="maskOn"/>
-    <div class="flex-1 scrollable">
+    <div class="flex-1" :class="isLargeScreen ? 'scrollable' : 'scrollable-thin'">
       <main class="wide my-10">
         <RouterView/>
-
       </main>
     </div>
     <div class="mask" @click="maskOn = !maskOn" :class="{'opacity-0 invisible': !maskOn}"></div>
