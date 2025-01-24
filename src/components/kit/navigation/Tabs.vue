@@ -1,66 +1,45 @@
 <script setup>
-import {Bell, Bug, Database, GitBranch, SquareTerminal} from "lucide-vue-next";
-import FeatureIcon from "Blocks/FeatureIcon.vue";
-import {ref} from 'vue'
 import {Tippy} from "vue-tippy";
 
-const icons = {
-  Bug: {
-    component: Bug,
-    shortcut: 'Alt+8'
-  },
-  Terminal: {
-    component: SquareTerminal,
-    shortcut: 'Ctrl+Shift+T',
-  },
-  Database: {
-    component: Database,
-  },
-  Git: {
-    component: GitBranch,
-    shortcut: 'Ctrl+G'
-  },
-  Notification: {
-    component: Bell,
-  },
-};
+const emit = defineEmits(['activateTab'])
 
-const activeIcon = ref('Database')
+defineProps({
+  tabs: {
+    type: Object,
+    required: true,
+    default: () => []
+  },
+  direction: {
+    type: String,
+    default: 'vertical',
+    validator(value) {
+      return ['horizontal', "vertical"].includes(value)
+    }
+  }
+})
 
-const setActiveIcon = (iconName) => {
-  activeIcon.value = iconName
+const toggleTab = (tabName) => {
+  emit("toggleTab", tabName)
 }
 
 </script>
 
 <template>
-  <div class="box row">
-    <div class="w-[34px] p-1 bg-white">
-      <div class="flex flex-col gap-3">
-        <Tippy animation="shift-away" placement="right" :arrow="false" v-for="(obj, key) in icons">
-          <button
-            :key="key"
-            :class="['btn-icon', activeIcon === key ? 'btn-secondary' : 'btn-ghost']"
-            @click="setActiveIcon(key)"
-          >
-            <component :is="obj.component"/>
-          </button>
-          <template #content>
-            <div class="">
-              {{ key }} <code v-if="obj?.shortcut" class="text-gray-400 ml-2">{{ obj.shortcut }}</code>
-            </div>
-          </template>
-        </Tippy>
-      </div>
-    </div>
-    <div class="flex-grow row justify-center">
-      <div>
-        <FeatureIcon :icon-component="icons[activeIcon].component" color="bg-blue-500"/>
-      </div>
+  <div class="w-[34px] p-1 bg-white">
+    <div class="flex gap-3" :class="direction === 'vertical' && 'flex-col'">
+      <Tippy animation="shift-away" placement="right"  :arrow="false" v-for="(obj, key) in tabs">
+        <button
+          :key="key"
+          class="btn-icon"
+          :class="obj?.active ? 'btn-secondary' : 'btn-ghost'"
+          @click="toggleTab(key)"
+        >
+          <component :is="obj.component"/>
+        </button>
+        <template #content>
+          <span v-html="obj?.tooltip"></span>
+        </template>
+      </Tippy>
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>
