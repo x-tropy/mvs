@@ -16,14 +16,12 @@ const props = defineProps({
 </script>
 
 <template>
-  <li class="flex flex-col gap-2">
+  <li class="flex flex-col gap-3">
     <!-- Icon Component -->
-    <div class="row gap-3">
-      <component :is="icon" class="p-1 linear-green opacity-70 rounded-md h-7 w-7 text-white"/>
+    <component :is="icon" class="p-2 linear-green opacity-70 rounded-md h-12 w-12 text-white"/>
 
-      <!-- Title as Prop -->
-      <h3 class="text-base font-semibold text-gray-600">{{ title }}</h3>
-    </div>
+    <!-- Title as Prop -->
+    <h3 class="text-lg font-semibold text-gray-600">{{ title }}</h3>
     <!-- Default Slot for Description -->
     <p class="text-gray-500">
       {{ description }}

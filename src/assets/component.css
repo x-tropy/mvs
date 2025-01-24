@@ -171,7 +171,7 @@
 }
 
 .btn-lg {
-  @apply gap-3 py-2 px-4 text-lg font-medium rounded-md;
+  @apply gap-3 py-3 px-5 text-lg font-medium rounded-md;
 
   svg {
     @apply h-6 w-6;
@@ -199,7 +199,7 @@
 }
 
 .btn-secondary {
-  @apply bg-blue-500 hover:bg-blue-700;
+  @apply bg-cyan-400 hover:bg-cyan-500;
 
   &.disabled {
     @apply hover:bg-blue-500 opacity-60;

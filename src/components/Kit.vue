@@ -1,9 +1,10 @@
 <script setup>
 
+import TabsExample from "kit/navigation/TabsExample.vue";
 </script>
 
 <template>
-UI Kit
+<TabsExample />
 </template>
 
 <style scoped>
