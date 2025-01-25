@@ -52,7 +52,7 @@ const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
 <template>
   <div>
-    <div class="fixed w-full bg-white top-0 z-20">
+    <div class="sticky backdrop-blur bg-opacity-50 w-full bg-white top-0 z-20">
       <Header @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus"
               :maskOn="maskOn"/>
     </div>
