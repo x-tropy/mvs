@@ -51,14 +51,12 @@ const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
 
 <template>
-  <div>
-    <div class="sticky backdrop-blur bg-opacity-50 w-full bg-white top-0 z-20">
-      <Header @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus"
-              :maskOn="maskOn"/>
-    </div>
-    <main class="wide my-20">
-      <RouterView/>
-    </main>
+  <div class="sticky backdrop-blur w-full bg-white top-0 z-20" :class="!maskOn && 'bg-opacity-50'">
+    <Header @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus"
+            :maskOn="maskOn"/>
   </div>
+  <main class="wide my-20">
+    <RouterView/>
+  </main>
   <div class="mask" @click="maskOn = !maskOn" :class="{'opacity-0 invisible': !maskOn}"></div>
 </template>
