@@ -10,6 +10,7 @@ export default defineConfig({
       'kit': path.resolve(__dirname, './src/components/kit'),
       'block': path.resolve(__dirname, './src/components/block'),
       'template': path.resolve(__dirname, './src/components/template'),
+      'doc': path.resolve(__dirname, './src/components/doc'),
     },
   },
 })

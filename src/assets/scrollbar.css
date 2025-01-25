@@ -18,10 +18,11 @@
 .scrollable {
   &::-webkit-scrollbar {
     width: 11px;
+    height: 11px;
   }
 
   &::-webkit-scrollbar-thumb {
-    @apply bg-gray-200;
+    @apply bg-gray-200 rounded-none;
   }
 
   &:hover::-webkit-scrollbar-thumb {
@@ -43,6 +44,7 @@
 .scrollable-thin {
   &::-webkit-scrollbar {
     width: 3px;
+    height: 3px;
   }
 
   &::-webkit-scrollbar-thumb {

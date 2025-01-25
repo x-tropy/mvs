@@ -8,29 +8,13 @@ import {
   IconCircleChevronRightFilled
 } from '@tabler/icons-vue'
 import Feature from "block/Feature.vue";
-
-const features = [
-  {
-    icon: IconSignRight, title: 'Opinionated by Design',
-    description: 'Every design choice is intentional & justified. Each component prioritizes simplicity and avoids unnecessary complexity. Stick with Tailwind & Vue 3—No bloat, no overengineering, just clean, minimal, and practical features.'
-  },
-  {
-    icon: IconHorseToy, title: 'Easy-to-use',
-    description: 'mvs UI includes only the core essentials. Components are designed as intuitive building blocks. Developers can assemble them like playing with Legos. Solve real problems, not fiddling with UI details.'
-  },
-  {
-    icon: IconAdjustmentsCheck, title: 'Fully Customizable',
-    description: 'Every component is designed for "copy & go" usability. Without deep abstractions, the codebase is flat, clean, and easy to modify. Developers can adapt components to their unique needs without feeling restricted.'
-  },
-  {
-    icon: IconBook, title: 'Educational',
-    description: 'mvs UI is more than just a tool, it’s also a learning resource. The straightforward code structure makes it easy to understand how things work, empowering developers to grow their skills while building projects.'
-  },
-]
+import Header from "doc/Header.vue";
+import {features} from "doc/data.js";
 </script>
 
 <template>
-  <div>
+  <Header />
+  <div class="wide pt-4 pb-20">
     <div class="mx-auto w-full px-5 mt-8 md:mt-14 md:w-2/3 xl:w-1/2">
       <h1 class="font-extrabold text-gray-800 text-4xl md:text-5xl text-center tracking-tight">Minimalist Web UI
         Solution</h1>
