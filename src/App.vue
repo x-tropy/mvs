@@ -2,7 +2,7 @@
 import {faGithub, faXTwitter} from "@fortawesome/free-brands-svg-icons";
 import {ref} from 'vue'
 import Header from 'kit/navigation/Header.vue'
-import { useMediaQuery } from '@vueuse/core'
+import {useMediaQuery} from '@vueuse/core'
 
 const textMenus = [
   {
@@ -51,13 +51,14 @@ const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
 
 <template>
-  <div class="flex h-screen flex-col">
-    <Header class="sticky top-0" @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus" :maskOn="maskOn"/>
-    <div class="flex-1 overflow-auto">
-      <main class="wide my-10">
-        <RouterView/>
-      </main>
+  <div>
+    <div class="fixed w-full bg-white top-0 z-20">
+      <Header @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus"
+              :maskOn="maskOn"/>
     </div>
-    <div class="mask" @click="maskOn = !maskOn" :class="{'opacity-0 invisible': !maskOn}"></div>
+    <main class="wide my-20">
+      <RouterView/>
+    </main>
   </div>
+  <div class="mask" @click="maskOn = !maskOn" :class="{'opacity-0 invisible': !maskOn}"></div>
 </template>

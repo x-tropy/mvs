@@ -5,8 +5,7 @@
   overflow: auto;
 }
 
-.scrollable-thin::-webkit-scrollbar-button,
-.scrollable::-webkit-scrollbar-button {
+::-webkit-scrollbar-button {
   width: 0;
   height: 0;
   display: none;
