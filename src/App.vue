@@ -53,7 +53,7 @@ const isLargeScreen = useMediaQuery('(min-width: 768px)')
 <template>
   <div class="flex h-screen flex-col">
     <Header @toggleMenusPanel="toggle" :textMenus="textMenus" :iconMenus="iconMenus" :maskOn="maskOn"/>
-    <div class="flex-1 scrollable">
+    <div class="flex-1 overflow-auto">
       <main class="wide my-10">
         <RouterView/>
       </main>
