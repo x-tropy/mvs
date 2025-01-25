@@ -21,19 +21,19 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    @apply bg-gray-100;
-  }
-
-  &:hover::-webkit-scrollbar-thumb {
     @apply bg-gray-200;
   }
 
-  &::-webkit-scrollbar-thumb:hover {
+  &:hover::-webkit-scrollbar-thumb {
     @apply bg-gray-300;
   }
 
-  &::-webkit-scrollbar-thumb:active {
+  &::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-400;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    @apply bg-gray-500;
   }
 }
 
