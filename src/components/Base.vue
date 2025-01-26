@@ -1,9 +1,10 @@
 <script setup>
-
+import Header from "doc/Header.vue";
 </script>
 
 <template>
-Base
+  <Header layout="tight"/>
+  Base
 </template>
 
 <style scoped>

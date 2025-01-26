@@ -5,6 +5,9 @@ import {IconList} from '@tabler/icons-vue'
 import {useMediaQuery} from "@vueuse/core";
 
 const isLargeScreen = useMediaQuery('(min-width: 768px)')
+const menus = [
+  'icons'
+]
 </script>
 
 <template>
@@ -12,8 +15,8 @@ const isLargeScreen = useMediaQuery('(min-width: 768px)')
     <div v-if="isLargeScreen" class="h-screen border-r border-gray-300 !overflow-x-clip scrollable-thin">
       <ResizablePanel panel-id="2">
         <ul>
-          <li class="py-[100px] border-b px-10" :key="key" v-for="(el, key) in [1,2,3,4,5,6,7,8,9,10]">
-            <span >{{el}}</span>
+          <li class="py-10 border-b border-gray-300 px-10" :key="key" v-for="(el, key) in menus">
+            <RouterLink :to="'/ui-kit/'+el">{{el}}</RouterLink>
           </li>
         </ul>
       </ResizablePanel>
@@ -26,6 +29,7 @@ const isLargeScreen = useMediaQuery('(min-width: 768px)')
     </div>
     <div class="flex-1">
       <Header layout="tight"/>
+      <div class="wide"><RouterView /></div>
     </div>
   </div>
 </template>

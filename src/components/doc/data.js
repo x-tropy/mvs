@@ -26,6 +26,7 @@ const textMenus = [
     url: '/roadmap',
   }
 ]
+
 const iconMenus = [
   {
     icon: faGithub,
@@ -36,6 +37,7 @@ const iconMenus = [
     url: 'http://x.com/extropy_ui'
   }
 ]
+
 const features = [
   {
     icon: IconSignRight, title: 'Opinionated by Design',
@@ -54,4 +56,5 @@ const features = [
     description: 'mvs UI is more than just a tool, it’s also a learning resource. The straightforward code structure makes it easy to understand how things work, empowering developers to grow their skills while building projects.'
   },
 ]
+
 export {textMenus, iconMenus, features}

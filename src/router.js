@@ -10,13 +10,23 @@ import Templates from "./components/Templates.vue";
 import Base from "./components/Base.vue";
 import Utility from "./components/Utility.vue";
 import Roadmap from "./components/Roadmap.vue";
+import Icons from "doc/Icons.vue"
 
 const routes = [
-  {path: '/ui-kit', component: Kit, meta: {title: 'UI Kit 🟨'}},
-  {path: '/blocks', component: Blocks, meta: {title: 'Blocks 🟨🟨'}},
-  {path: '/templates', component: Templates, meta: {title: 'Templates 🟨🟨🟨'}},
-  {path: '/base', component: Base, meta: {title: 'Base 🔹 CSS'}},
-  {path: '/utility', component: Utility, meta: {title: 'Utility 🔹 JavaScript'}},
+  {
+    path: '/ui-kit', component: Kit, meta: {title: 'UI Kit 🔹'},
+    children: [
+      {
+        path: 'icons', // This is a child route
+        component: Icons,
+        meta: {title: 'Icons'},
+      }
+    ]
+  },
+  {path: '/blocks', component: Blocks, meta: {title: 'Blocks 🔹🔹'}},
+  {path: '/templates', component: Templates, meta: {title: 'Templates 🔹🔹🔹'}},
+  {path: '/base', component: Base, meta: {title: 'Base / CSS'}},
+  {path: '/utility', component: Utility, meta: {title: 'Utility / JavaScript'}},
   {path: '/roadmap', component: Roadmap, meta: {title: 'Roadmap 🗺️'}},
   {path: '/', component: HomeView, name: 'home'},
   {

@@ -1,9 +1,10 @@
 <script setup>
-
+import Header from "doc/Header.vue";
 </script>
 
 <template>
-Templates
+  <Header layout="tight"/>
+  Templates
 </template>
 
 <style scoped>
