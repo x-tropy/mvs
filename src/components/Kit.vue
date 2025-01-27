@@ -24,7 +24,7 @@ const menus = [
     <div v-else class="float-btn-left">
       <div class="container">
         <IconList/>
-        <span>Index</span>
+        <span>INDEX</span>
       </div>
     </div>
     <div class="flex-1">

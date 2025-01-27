@@ -241,11 +241,11 @@
 .float-btn-left {
   @apply absolute left-0 top-10 border;
   .container {
-    @apply sticky top-10 shadow-xl rounded-br rounded-tr p-1 text-gray-500 bg-white hover:bg-gray-200  cursor-pointer;
+    @apply sticky top-10 shadow-xl rounded-br rounded-tr p-1 text-gray-500 bg-white hover:bg-gray-200 cursor-pointer;
 
     span {
-      @apply text-sm font-semibold font-mono inline-block;
-      writing-mode: vertical-rl;
+      @apply text-sm font-black font-mono inline-block break-words text-center w-4 leading-none;
+      /*writing-mode: vertical-rl;*/
     }
 
     svg {

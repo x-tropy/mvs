@@ -1,8 +1,15 @@
 <script setup>
 import * as icons from '@tabler/icons-vue'; // Replace with your node module
 import {ref, computed} from 'vue';
+import iconList from './icon-list.json'
 
-const searchQuery = ref('');
+let categorizedIcons = {}
+iconList.forEach(obj => {
+  const category = Object.keys(obj)[0]
+  categorizedIcons[category] = obj[category]
+})
+
+console.log({categorizedIcons})
 
 // Convert imported icons into an array of { name, component }
 const allIcons = Object.entries(icons)
@@ -14,34 +21,32 @@ const allIcons = Object.entries(icons)
     component,
   }));
 
-// filled, brand, arrow, circle, square, squarerounded, file&folder, number, device
-const all = ref(false)
-const other = ref(false)
-const filled = ref(false)
-const brand = ref(false)
-const arrow = ref(false)
+const searchQuery = ref('');
+const selectedCategories = ref([]);
+const categoryNames = Object.keys(categorizedIcons)
 
 // Filter icons based on the search query
 const filteredIcons = computed(() => {
     let searchFiltered = allIcons.filter(icon =>
       icon.name.toLowerCase().includes(searchQuery.value.toLowerCase())
     )
-    if (brand.value && filled.value) {
-      return searchFiltered.filter(icon => icon.name.startsWith('IconBrand') || icon.name.endsWith('Filled'))
-    } else if (brand.value) {
-      return searchFiltered.filter(icon => icon.name.startsWith('IconBrand'))
-    } else if (filled.value) {
-      return searchFiltered.filter(icon => icon.name.endsWith('Filled'))
+    if (selectedCategories.value.length > 0) {
+      const allowedIcons = new Set(
+        selectedCategories.value.flatMap(category => categorizedIcons[category])
+      );
+      searchFiltered = searchFiltered.filter(icon => allowedIcons.has(icon.name));
     }
-    return searchFiltered
+
+    return searchFiltered;
   }
 );
 
 function copyToClipboard(text, e) {
   navigator.clipboard.writeText(text)
-  e.target.classList.add('bg-green-200')
+  console.log(e.target)
+  e.target.classList.add('bg-green-300')
   setTimeout(() => {
-    e.target.classList.remove('bg-green-200')
+    e.target.classList.remove('bg-green-300')
   }, 1000)
 }
 </script>
@@ -60,17 +65,51 @@ function copyToClipboard(text, e) {
       <label for="filled"><input id="filled" type="checkbox" v-model="filled"/> Filled</label>
     </div>
 
+    <!-- category checkboxes -->
+    <div class="row gap-4 my-5">
+      <label v-for="category in categoryNames" :key="category" class="hover:cursor-pointer row gap-1">
+        <input
+          type="checkbox"
+          :value="category"
+          v-model="selectedCategories"
+        />
+        {{ category }}<span class="text-xs text-gray-400 font-bold font-num">{{categorizedIcons[category].length}}</span>
+      </label>
+    </div>
+
     <!-- Icon Grid -->
-    <div class="grid grid-cols-8">
-      <div v-for="icon in filteredIcons" @click.prevent="copyToClipboard(icon.name, $event)" :key="icon.name"
-           class="transition-colors bg-white py-4 gap-2 col">
-        <component :is="icon.component" stroke="1.5"
-                   class=" h-6 w-6 text-gray-600 rounded-md"/>
-        <span class="text-xs text-gray-800 truncate w-full text-center">{{ icon.name.slice(4) }}</span>
+    <div class="row flex-wrap gap-2">
+      <div v-for="icon in filteredIcons" @click="copyToClipboard(icon.name, $event)" :key="icon.name"
+           class="item">
+        <div class="wrap">
+          <component class="h-5 w-5" :is="icon.component" stroke="2"/>
+        </div>
+        <span class="label">{{
+            icon.name.slice(4)
+          }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <style>
+.item {
+  @apply transition-colors bg-white hover:cursor-pointer gap-2 w-20 h-20 items-center flex flex-col;
+
+  .wrap {
+    @apply p-1 mt-3 text-gray-600 rounded bg-white transition-colors;
+  }
+
+  .label {
+    @apply text-xs font-semibold text-gray-300 break-words leading-none w-full text-center transition-colors;
+  }
+
+  &:hover .wrap {
+    @apply bg-gray-600 text-white;
+  }
+
+  &:hover .label {
+    @apply text-gray-600;
+  }
+}
 </style>
