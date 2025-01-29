@@ -253,3 +253,11 @@
     }
   }
 }
+
+input {
+  @apply focus:outline-none focus:ring-0  border border-gray-400 rounded p-2;
+}
+
+input[type=checkbox] {
+  @apply hover:cursor-pointer;
+}

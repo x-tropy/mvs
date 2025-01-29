@@ -65,15 +65,15 @@ const categorizedFiles = getFileListByCategory(baseDir);
 // Convert the categories object into the desired array format
 const result = Object.entries(categorizedFiles).map(([key, value]) => ({[key]: value}));
 
+let categorizedIcons = {}
+result.forEach(obj => {
+  const category = Object.keys(obj)[0]
+  categorizedIcons[category] = obj[category]
+})
+
 function writeToJsonFile(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
   console.log(`File written successfully to ${filePath}`);
 }
 
-writeToJsonFile('./icon-list.json', result)
-
-// Example output:
-// [
-//   { Animals: ['IconCat', 'IconDog'] },
-//   { Arrows: ['IconArrowRight'] }
-// ]
+writeToJsonFile('./icon-list.json', categorizedIcons)
