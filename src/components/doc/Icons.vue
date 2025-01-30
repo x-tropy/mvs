@@ -6,6 +6,7 @@ import {categoryIconNames} from "doc/data.js";
 import {useStorage} from '@vueuse/core'
 import {debounce} from "lodash-es";
 
+
 // { Animal: ['IconCat', 'IconDog', ... ], Health: [], ...}
 import groupedIconNames from './icon-list.json'
 
@@ -95,7 +96,7 @@ function copyToClipboard(text, e) {
     <div class="row gap-1">
       <label v-for="category in categories" :key="category.name"
              class="hover:cursor-pointer p-2 hover:bg-cyan-100 text-sm text-gray-800 w-48 font-semibold row gap-1">
-        <input type="checkbox"  :value="category.name" v-model="categoryNames"/>
+        <input type="checkbox" :value="category.name" v-model="categoryNames"/>
         <component :is="category.icon" stroke="1.5" class="h-5 w-5 text-gray-600"/>
         {{ category.name }}
         <span class="text-xs text-gray-400 font-num">· {{ category.count }}</span>
@@ -103,24 +104,26 @@ function copyToClipboard(text, e) {
     </div>
 
     <!-- Icon Grid -->
-    <div class="my-14" v-for="(icons, categoryName) in categoriesToRender">
+    <div class="my-14" v-for="(categoryIcons, categoryName) in categoriesToRender">
       <h2
         class="font-extrabold text-2xl border-b-2 tracking-tight text-gray-600 pb-2 mb-4 border-gray-300 row gap-2">
-        <component :is="icons[categoryIconNames[categoryName]] || IconSearch" class="h-7 w-7"/>
+        <component stroke="2" :is="icons[categoryIconNames[categoryName]] || IconSearch" class="h-6 w-6 p-0.5 text-white bg-gray-500 rounded"/>
         {{ categoryName }}
-        <span class="font-normal text-lg text-gray-400">({{ Object.keys(icons).length }})</span>
+        <span class="font-normal text-lg text-gray-400">({{ Object.keys(categoryIcons).length }})</span>
       </h2>
       <div class="row flex-wrap gap-2">
-        <div v-for="(iconComponent, iconName) in icons" @click="copyToClipboard(iconName, $event)" :key="iconName"
-             class="item">
-          <IconStar class="btn-favorite"/>
-          <div class="wrap">
-            <component class="h-6 w-6" :is="iconComponent" stroke="2"/>
-          </div>
-          <span class="label">
+        <template v-for="(iconComponent, iconName) in categoryIcons">
+          <div v-if="typeof iconComponent === 'function' && iconName !== 'createVueComponent'" @click="copyToClipboard(iconName, $event)" :key="iconName"
+               class="item">
+            <IconStar class="btn-favorite"/>
+            <div class="wrap">
+              <component class="h-6 w-6" :is="iconComponent" stroke="2"/>
+            </div>
+            <span class="label">
               {{ iconName.slice(4) }}
             </span>
-        </div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -131,7 +134,7 @@ function copyToClipboard(text, e) {
   @apply transition-colors bg-white hover:cursor-pointer hover:bg-cyan-100 gap-2 w-20 h-20 items-center flex flex-col relative;
 
   .btn-favorite {
-    @apply opacity-0 transition-all h-5 w-5 p-1 bg-yellow-100 rounded text-yellow-400  absolute -top-1 -right-1;
+    @apply opacity-0 transition-all h-6 w-6 p-1 bg-yellow-100 rounded text-yellow-400  absolute -top-1 -right-1;
 
     &:hover {
       @apply text-yellow-500;
@@ -143,7 +146,7 @@ function copyToClipboard(text, e) {
   }
 
   .label {
-    @apply text-xs font-semibold text-gray-400 break-words leading-tight w-full text-center transition-colors;
+    @apply text-xs text-gray-400 break-words leading-tight w-full text-center transition-colors;
   }
 
   &:hover .wrap {
