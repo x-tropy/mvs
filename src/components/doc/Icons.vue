@@ -1,11 +1,10 @@
 <script setup>
-import * as icons from '@tabler/icons-vue'
+import {icons} from '@tabler/icons-vue'
 import {IconStar, IconSearch} from '@tabler/icons-vue'
 import {ref, computed, onMounted} from 'vue';
 import {categoryIconNames} from "doc/data.js";
 import {useStorage} from '@vueuse/core'
 import {debounce} from "lodash-es";
-
 
 // { Animal: ['IconCat', 'IconDog', ... ], Health: [], ...}
 import groupedIconNames from './icon-list.json'
@@ -42,6 +41,10 @@ const searchQuery = ref('');
 const debouncedSearch = ref('')
 const categoryNames = useStorage('selected-icon-categories', [])
 
+function splitCamelCase(str) {
+  return str.match(/[A-Z][a-z]*|\d+/g).map(word => word.toLowerCase());
+}
+
 // Filter icons based on the search query
 const categoriesToRender = computed(() => {
   let result = {}
@@ -49,10 +52,40 @@ const categoriesToRender = computed(() => {
     const queries = debouncedSearch.value.toLowerCase().split(' ')
     const results = {}
     Object.keys(icons).filter(iconName => {
-      return queries.some(query => iconName.toLowerCase().includes(query))
+      const flatIconName = iconName.toLowerCase().slice(4)
+      const iconWords = splitCamelCase(iconName.slice(4))
+
+      // ['!app'] ——x-> 'apple', 'brandapple', 'brandapplenews'
+      const shouldExclude = queries.some(query => {
+        if (query[0] === '!' && flatIconName.includes(query.slice(1))) {
+          return true
+        } else {
+          return false
+        }
+      })
+      if (shouldExclude) return false
+
+      // ['_app', 'arrow_'] --> 'IconApple', 'IconRightArrow'
+      const shouldInclude = queries.some(query => {
+        // preliminary condition should pass first
+        const queryNoWildChar = query.replace(/[!_]/g, '')
+        if (!flatIconName.includes(queryNoWildChar)) return false
+
+        console.log(query)
+        // deal with wild char matching
+        if (query.at(0) === '_' && query.at(-1) === '_') {
+          return iconWords.some(word => word === queryNoWildChar)
+        } else if (query.at(0) === '_') {
+          return iconWords.some(word => word.startsWith(queryNoWildChar))
+        } else if (query.at(-1) === '_') {
+          return iconWords.some(word => word.endsWith(queryNoWildChar))
+        }
+        console.log(iconName)
+        return true
+      })
+      return shouldInclude
     }).forEach(iconName => results[iconName] = icons[iconName])
 
-    console.log(results)
     result['Search results'] = results
   }
   categoryNames.value.forEach(category => result[category] = groupedIcons[category])
@@ -107,23 +140,23 @@ function copyToClipboard(text, e) {
     <div class="my-14" v-for="(categoryIcons, categoryName) in categoriesToRender">
       <h2
         class="font-extrabold text-2xl border-b-2 tracking-tight text-gray-600 pb-2 mb-4 border-gray-300 row gap-2">
-        <component stroke="2" :is="icons[categoryIconNames[categoryName]] || IconSearch" class="h-6 w-6 p-0.5 text-white bg-gray-500 rounded"/>
+        <component stroke="2" :is="icons[categoryIconNames[categoryName]] || IconSearch"
+                   class="h-6 w-6 p-0.5 text-white bg-gray-500 rounded"/>
         {{ categoryName }}
         <span class="font-normal text-lg text-gray-400">({{ Object.keys(categoryIcons).length }})</span>
       </h2>
       <div class="row flex-wrap gap-2">
-        <template v-for="(iconComponent, iconName) in categoryIcons">
-          <div v-if="typeof iconComponent === 'function' && iconName !== 'createVueComponent'" @click="copyToClipboard(iconName, $event)" :key="iconName"
-               class="item">
-            <IconStar class="btn-favorite"/>
-            <div class="wrap">
-              <component class="h-6 w-6" :is="iconComponent" stroke="2"/>
-            </div>
-            <span class="label">
+        <div v-for="(iconComponent, iconName) in categoryIcons"
+             @click="copyToClipboard(iconName, $event)" :key="iconName"
+             class="item">
+          <IconStar class="btn-favorite"/>
+          <div class="wrap">
+            <component class="h-6 w-6" :is="iconComponent" stroke="1.65"/>
+          </div>
+          <span class="label">
               {{ iconName.slice(4) }}
             </span>
-          </div>
-        </template>
+        </div>
       </div>
     </div>
   </div>
