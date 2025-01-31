@@ -8,6 +8,7 @@ import {debounce} from "lodash-es";
 
 // { Animal: ['IconCat', 'IconDog', ... ], Health: [], ...}
 import groupedIconNames from './icon-list.json'
+import {filterCamelCase, getQueries, splitCamelCase} from "utility/string.js";
 
 const groupedIconsSet = new Set(Object.values(groupedIconNames).flat());
 const ungroupedIcons = Object.keys(icons).filter(icon => !groupedIconsSet.has(icon));
@@ -41,50 +42,15 @@ const searchQuery = ref('');
 const debouncedSearch = ref('')
 const categoryNames = useStorage('selected-icon-categories', [])
 
-function splitCamelCase(str) {
-  return str.match(/[A-Z][a-z]*|\d+/g).map(word => word.toLowerCase());
-}
-
 // Filter icons based on the search query
 const categoriesToRender = computed(() => {
   let result = {}
   if (debouncedSearch.value !== '') {
-    const queries = debouncedSearch.value.toLowerCase().split(' ')
+    const queries = getQueries(debouncedSearch.value)
     const results = {}
-    Object.keys(icons).filter(iconName => {
-      const flatIconName = iconName.toLowerCase().slice(4)
-      const iconWords = splitCamelCase(iconName.slice(4))
 
-      // ['!app'] ——x-> 'apple', 'brandapple', 'brandapplenews'
-      const shouldExclude = queries.some(query => {
-        if (query[0] === '!' && flatIconName.includes(query.slice(1))) {
-          return true
-        } else {
-          return false
-        }
-      })
-      if (shouldExclude) return false
-
-      // ['_app', 'arrow_'] --> 'IconApple', 'IconRightArrow'
-      const shouldInclude = queries.some(query => {
-        // preliminary condition should pass first
-        const queryNoWildChar = query.replace(/[!_]/g, '')
-        if (!flatIconName.includes(queryNoWildChar)) return false
-
-        console.log(query)
-        // deal with wild char matching
-        if (query.at(0) === '_' && query.at(-1) === '_') {
-          return iconWords.some(word => word === queryNoWildChar)
-        } else if (query.at(0) === '_') {
-          return iconWords.some(word => word.startsWith(queryNoWildChar))
-        } else if (query.at(-1) === '_') {
-          return iconWords.some(word => word.endsWith(queryNoWildChar))
-        }
-        console.log(iconName)
-        return true
-      })
-      return shouldInclude
-    }).forEach(iconName => results[iconName] = icons[iconName])
+    filterCamelCase(Object.keys(icons), queries)
+      .forEach(iconName => results[iconName] = icons[iconName])
 
     result['Search results'] = results
   }

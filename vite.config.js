@@ -11,6 +11,7 @@ export default defineConfig({
       'block': path.resolve(__dirname, './src/components/block'),
       'template': path.resolve(__dirname, './src/components/template'),
       'doc': path.resolve(__dirname, './src/components/doc'),
+      'utility': path.resolve(__dirname, './src/components/utility'),
     },
   },
 })
