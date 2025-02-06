@@ -70,10 +70,11 @@ const onInput = (event) => {
 
 function copyToClipboard(text, e) {
   navigator.clipboard.writeText(text)
-  console.log(e.target)
-  e.target.classList.add('bg-green-300')
+  const target = e.target.closest('.item');
+  console.log(target)
+  target.classList.add('ring-1', 'ring-green-400')
   setTimeout(() => {
-    e.target.classList.remove('bg-green-300')
+    target.classList.remove('ring-1', 'ring-green-400')
   }, 1000)
 }
 </script>
@@ -113,7 +114,7 @@ function copyToClipboard(text, e) {
       </h2>
       <div class="row flex-wrap gap-2">
         <div v-for="(iconComponent, iconName) in categoryIcons"
-             @click="copyToClipboard(iconName, $event)" :key="iconName"
+             @click.capture="copyToClipboard(iconName, $event)" :key="iconName"
              class="item">
           <IconStar class="btn-favorite"/>
           <div class="wrap">
